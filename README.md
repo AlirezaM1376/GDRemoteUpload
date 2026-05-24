@@ -1,5 +1,8 @@
-# GDRemoteUpload
-A simple and easy way to remote-upload files frome links to Google Drive
+<div align="center">
+  <h1>GDRemoteUpload</h1>
+  <p><img width="360" src="https://" /></p>
+  <p>A simple and easy way to remote-upload files frome links to Google Drive</p>
+</div>
 
 ## Setup instructions
 1. Open https://script.google.com and sign-in to your Google account 
@@ -25,4 +28,5 @@ A simple and easy way to remote-upload files frome links to Google Drive
 4. Click on Upload and wait. Dependig on the file size, uploading process can take up to minutes.
 5. On successful upload you will receive the download link from GD or you can check the Google Drive separately.
 6. If the size of the file goes more than 50 MB, the file will be splitted in parts. In this case you need to download all parts and then use the FileJoiner.bat to join the parts and receive the main file.
+
 
