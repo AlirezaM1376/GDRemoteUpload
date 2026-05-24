@@ -1,6 +1,6 @@
 <div align="center">
   <h1>GDRemoteUpload</h1>
-  <p><img width="360" src="https://" /></p>
+  <p><img width="360" src="https://github.com/AlirezaM1376/GDRemoteUpload/raw/refs/heads/main/GDRemoteUp_dark.jpg" /></p>
   <p>A simple and easy way to remote-upload files frome links to Google Drive</p>
 </div>
 
