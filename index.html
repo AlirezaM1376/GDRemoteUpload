@@ -1,6 +1,8 @@
-<!-- GD Remote Upload Front-End
----- Remote-Upload to Google Drive using Google Apps Script.
+
+<!-- GD Remote Upload v1.1 Front-End
+---- Remote-Upload files from links to Google Drive using Google Apps Script.
 ---- https://github.com/AlirezaM1376/GDRemoteUpload
+---- https://git.theazizi.ir/AlirezaM/GDRemoteUpload
 !-->
 
  <!DOCTYPE html>
@@ -233,8 +235,8 @@
       </div>
 
       <div class="form-group">
-        <label for="folderId">Save to folder in Google Drive</label>
-        <input type="text" id="folderId" name="folderId" placeholder="Enter folder ID or leave empty to upload in root">
+        <label for="folderId">Save to folder (Enter Folder ID)</label>
+        <input type="text" id="folderId" name="folderId" placeholder="Leave empty to use default folder (GDRemoteUpload)">
         <div class="hint">Optional</div>
       </div>
 
@@ -245,7 +247,7 @@
     <div id="result"></div>
 
     <div class="footer">
-      <p>Created by <strong><a href="https://t.me/ComedyElahi" target="_blank">Alireza.M</a></strong></p>
+      <p>Created by <strong><a href="https://t.me/ComedyElahi" target="_blank">Alireza.M</a></Fstrong></p>
       <p style="margin-top: 5px; font-size: 0.75rem; opacity: 0.7;"><strong><a href="https://github.com/AlirezaM1376/GDRemoteUpload" target="_blank">GD Remote Upload in GitHub</a></strong></p>
     </div>
   </div>
@@ -253,12 +255,17 @@
   <script>
     
     const themeBtn = document.getElementById('themeBtn');
+	  const folderIdTextbox = document.getElementById('folderId');
     const body = document.body;
     
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       body.setAttribute('data-theme', savedTheme);
       updateThemeIcon(savedTheme);
+    }
+	  var folderIdValue = localStorage.getItem('folderIdValue');
+	  if (folderIdValue){
+      folderIdTextbox.value = folderIdValue || "";
     }
 
     themeBtn.addEventListener('click', () => {
@@ -290,11 +297,12 @@
       const fileLink = document.getElementById('fileLink').value.trim();
       const fileName = document.getElementById('fileName').value.trim();
       const folderId = document.getElementById('folderId').value.trim();
+	    localStorage.setItem('folderIdValue', folderId);
 
       google.script.run
         .withSuccessHandler((response) => {
-          // موفقیت
-          loadingDiv.style.display = 'none';
+		
+		  loadingDiv.style.display = 'none';
           submitBtn.disabled = false;
           submitBtn.textContent = 'Upload';
           
@@ -324,6 +332,11 @@
           }
           
           form.reset();
+		      folderIdValue = localStorage.getItem('folderIdValue');
+		      if (folderIdValue){
+            folderIdTextbox.value = folderIdValue || "";
+          }
+
         })
         .withFailureHandler((error) => {
 
@@ -336,7 +349,7 @@
           resultDiv.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
           resultDiv.innerHTML = `<strong>❌ Someting went wrong!</strong><br>${error.message}`;
         })
-        .processFile({ fileLink: fileLink, fileName: fileName, folderId: folderId });
+        .processLink({ fileLink: fileLink, fileName: fileName, folderId: folderId });
     });
   </script>
 </body>
